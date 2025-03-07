@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag and Drop - Check Order</title>
+  <style>
+    /* Add your styles here */
+
+  </style>
+      <script src="game.js"></script>
+      <script src="lesson1.js"></script>
+      <script src="https://q5js.org/q5.js"></script>
+      <script src="https://p5play.org/v3/planck.min.js"></script>
+      <script src="https://p5play.org/v3/p5play.js"></script>
+</head>
+<body>
+    <div class="stage1Container">
+        <div class="empty" id="gameContainer">
+        <p id = "win"></p>
+        <button id="nextButton"></button>
+    </div>
+    </div>
+    <div class="rightPanel">
+        <div class="rightPaneltop">
+            <a href="index.html">
+            <button id="previousLevel">
+                <i class="fa-solid fa-caret-left"></i></button>
+            </a>
+            <a href="stage2.html">
+                <button id="nextLevel">
+                <i class="fa-solid fa-caret-right"></i></button>
+            </a>
+            <button class="takeNote stageNote" onclick="toggleNoteIframe()">
+                <i class="fa-solid fa-note-sticky"></i>
+                Take Note</button>
+            <h1 id="rightPanelTitle">Level 1 of 20</h1>
+        </div>
+        <div class="toolBox">
+            <ul class="draggable-list" id="draggable-list"></ul>
+
+        </div>
+        <div class="playButton"></div>
+        <div class="bluePrint"></div>
+        <div class="rightPanelInstruction">
+            <h1>Instruction</h1>
+        <iframe id="noteIframe" src="note.html"></iframe>
+        </div>
+  <div class="codingSection"></div>
+
+  <button class="check-btn" id="check">
+    <i class="fa-solid fa-play"></i> Check Order
+  </button>
+
+  <p id = "correct">1</p>
+<button class="reset-btn" id="reset">
+    <i class="fa-solid fa-play"></i>
+    </button>
+  <link rel="stylesheet" href="styles.css">
+  <script src="game.js"></script>
+
+  <script>
+    const draggable_list = document.getElementById('draggable-list');
+    const checkButton = document.getElementById('check');
+    const resetButton = document.getElementById('reset');
+    let codingSectionArray = [];
+
+    const ifFunction = [
+      'if (subject colliding object)',
+      '{',
+      '}',
+      'block',
+      'crate',
+      'stairs',
+      'closed door',
+      'opened door',
+      'move to right',
+      'move up'
+    ];
+
+    // Store listitems
+    const listItems = [];
+
+    let dragStartIndex;
+
+    createList();
+
+    // Insert list items into DOM
+    function createList() {
+      [...ifFunction]
+        .map(a => ({ value: a, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(a => a.value)
+        .forEach((block, index) => {
+          const listItem = document.createElement('li');
+
+          listItem.setAttribute('data-index', index);
+
+          listItem.innerHTML = `
+            <span class="number">${index + 1}</span>
+            <div class="draggable" draggable="true">
+              <p class="block-name">${block}</p>
+            </div>
+          `;
+
+          listItems.push(listItem);
+
+          draggable_list.appendChild(listItem);
+        });
+
+      addEventListeners();
+    }
+
+    function dragStart() {
+      dragStartIndex = +this.closest('li').getAttribute('data-index');
+    }
+
+    function dragEnter() {
+      this.classList.add('over');
+    }
+
+    function dragLeave() {
+      this.classList.remove('over');
+    }
+
+    function dragOver(e) {
+      e.preventDefault();
+    }
+
+    function dragDrop(event) {
+      event.preventDefault(); 
+      const draggedItem = document.querySelector(`[data-index='${dragStartIndex}']`);
+
+      if (this.classList.contains('codingSection')) {
+        this.appendChild(draggedItem);
+        codingSectionArray.push(draggedItem.querySelector('.draggable').innerText.trim());
+      } else {
+        const dragEndIndex = +this.getAttribute('data-index');
+        if (!isNaN(dragEndIndex)) {
+          dropItems(dragStartIndex, dragEndIndex);
+        }
+      }
+      this.classList.remove('over');
+    }
+
+    function dropItems(fromIndex, toIndex) {
+      if (fromIndex === toIndex) return;
+
+      const itemOne = listItems[fromIndex].querySelector('.draggable');
+      const itemTwo = listItems[toIndex].querySelector('.draggable');
+
+      listItems[fromIndex].appendChild(itemTwo);
+      listItems[toIndex].appendChild(itemOne);
+    }
+
+    // Check the order of blocks in the codingSection
+    function checkOrder() {
+      const blocksInCodingSection = Array.from(codingSection.children); // Get all the child elements of codingSection
+
+      blocksInCodingSection.forEach((block, index) => {
+        const blockName = block.querySelector('.draggable').innerText.trim(); // Get the block name
+
+        // Compare block name with the ifFunction array
+        if (blockName !== ifFunction[index]) {
+          block.classList.add('wrong'); // Add 'wrong' class if the block is in the wrong order
+          block.classList.remove('right'); // Remove 'right' class if the block is in the wrong order
+        } else {
+          block.classList.remove('wrong'); // Remove 'wrong' class if the block is in the correct order
+          block.classList.add('right'); // Add 'right' class if the block is in the correct order
+        }
+      });
+
+      // Check if all blocks are in the correct order
+      const allCorrect = blocksInCodingSection.every((block, index) => block.querySelector('.draggable').innerText.trim() === ifFunction[index]);
+      const correctp =  document.getElementById('correct');
+      if (allCorrect) {
+        correctp.innerHTML = "Correct";
+      } else {
+        alert('Some blocks are in the wrong order.');
+        correctp.innerHTML = "No";
+      }
+    }
+
+    function addEventListeners() {
+      const draggables = document.querySelectorAll('.draggable');
+      const dragListItems = document.querySelectorAll('.draggable-list li');
+      
+      draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', dragStart);
+      });
+
+      dragListItems.forEach(item => {
+        item.addEventListener('dragover', dragOver);
+        item.addEventListener('drop', dragDrop);
+        item.addEventListener('dragenter', dragEnter);
+        item.addEventListener('dragleave', dragLeave);
+      });
+    }
+
+    const codingSection = document.querySelector('.codingSection');
+    codingSection.addEventListener('dragover', dragOver);
+    codingSection.addEventListener('drop', dragDrop);
+    codingSection.addEventListener('dragenter', dragEnter);
+    codingSection.addEventListener('dragleave', dragLeave);
+
+    // Attach checkOrder function to the check button
+    checkButton.addEventListener('click', checkOrder);
+
+  </script>
+
+</body>
+</html>

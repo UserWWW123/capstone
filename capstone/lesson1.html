@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="lesson1.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/44ae50a47e.js" crossorigin="anonymous"></script>
+
+</head>
+<body id="lessonPage">
+    <div class="lesson">
+    <div class= "lessonTop">
+        <h1 class="lessonTitle">What is Function?</h1>
+        <div class="toolButton">
+        <button class="takeNote" onclick="toggleNoteIframe()">
+            <i class="fa-solid fa-note-sticky"></i>
+            Take Note</button>
+    </div>
+    <iframe id="noteIframe" src="note.html"></iframe>
+    </div>
+    <div class = "lessonMiddle lessonpage1">
+        <p>Instruction / images/short storyline</p>
+        <br>
+        <p>Include small exercise (player need to complete them to click blocks in toolbox).</p>
+    </div>
+    <div class = "lessonMiddle lessonpage2">
+        <p>Page2</p>
+                <div class = 'choices'>
+            <button class = "choicesButton" onclick = "checkAnswer('answer1')">answer 1</button>
+            <button class = "choicesButton" onclick = "checkAnswer('answer2')">answer 2</button>
+            <button class = "choicesButton" onclick = "checkAnswer('answer3')">answer 3</button>
+            <button class = "choicesButton" onclick = "checkAnswer('answer4')">answer 4</button>
+            <p id="answer"></p>
+        </div>    
+    </div>
+    <div class="lessonButton">
+    <button class="lessonPageButton1" onclick="changePage(1)">1</button>
+    <button class="lessonPageButton2" onclick="changePage(2)">2</button>
+    <button class="lessonPageButton3" onclick="changePage(3)">3</button>
+    <button class="lessonPageButton1" onclick="changePage(4)">4</button>
+    <button class="lessonPageButton2" onclick="changePage(5)">5</button>
+    <button class="lessonPageButton3" onclick="changePage(6)">6</button>
+</div>
+
+    </div>
+    
+</body>
+</html>

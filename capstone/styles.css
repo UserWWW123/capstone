@@ -1,0 +1,576 @@
+body{
+    background-color: #dbb691ff;
+    font-family: "Economica", sans-serif;
+    height:100%;
+    color:#a15e21;
+}
+
+.homePage{
+    background-image: url("https://i.postimg.cc/G2XdCmNJ/Sample.png");
+    background-size: cover;
+    background-position:center;
+    background-repeat: no-repeat;
+    height:100vh;
+    margin:0;
+}
+#title{
+    font-size:70px;
+    background-color: bisque;
+    padding-right:10px;
+    padding-left:10px; 
+    margin-top: 100px;
+}
+.container{
+    display: grid;
+    place-items: center;
+    grid-template-rows: repeat(2,auto);
+    gap: 100px;
+}
+.header{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+.alien-beige, .alien-yellow{
+    width: 100px;
+    height:100px;
+    margin-top:80px;
+}
+.gameButton{
+    padding:10px;
+    background-color:bisque;
+    color:#a15e21;
+    border-radius: 5px;
+    font-size:38px;
+    border: none;
+    font-family: "Economica", sans-serif !important;
+    font-weight: 700;
+    text-align: center;
+    width: 300px;
+}
+  
+#level1Title{
+    font-size: 50px;
+    position: absolute;
+    top: 1%;
+    left: 2%;
+    z-index: 1; 
+    font-weight: 400;
+}
+.rectangle{
+    width: 98%;
+    height: 96%;
+    background-color: #fdb546ff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:0;
+}
+.levelButtons{
+    background-color: transparent;
+    border:none;
+    padding:0;
+}
+.levelDoors{
+    margin-left: 4%;
+    display:grid;
+    grid-template-columns: repeat(3, auto);
+    width: 100%;
+}
+.levelImages{ /*need to fix it - make it adjust to screen size*/
+    z-index: 1;
+    position: absolute;
+    width: 20%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.levelArrows{
+    margin-left: 20%;
+    margin-top: 5%;
+    display:grid;
+    grid-template-columns: repeat(3, auto);
+    width: 100%;
+}
+.Beige{
+    width: 98%;
+    height: 96%;
+    background-color: #f4eddfff;
+    border: 5px solid #fdb546ff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:0;
+}
+
+.noteContainer{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1; /*need to fix it*/
+    place-items: center;
+    z-index:1;
+    position: relative;
+}
+#noteInput{
+    width: 900px;
+    height: 80vh;
+    border: none;
+    padding: 20px;
+    padding-top: 10px;
+    font-family: "Economica", sans-serif;
+    font-size: 16px;
+    resize: none;
+    background-color: #dbb691ff;
+    color: white;
+    line-height: 4vh; 
+    background-image: linear-gradient(to bottom, #ddd 1px, transparent 1px); /* Creates the lines */
+    background-size: 100% 4vh;
+    outline: none;
+}
+
+.stage1Container{
+    display: grid;
+    grid-template-columns: 6fr 4fr; /*need to fix it*/
+    grid-template-areas: 
+        "empty rightPanel";
+    width: 100%;
+    height: 100%;
+}
+
+.instructionSection{
+    width: 100%;
+    height: 100%;
+}
+.rightPanel{
+    grid-area: rightPanel;
+    background-color: #f4eddfff;
+    z-index:1;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 8% 30% 60%;
+    grid-template-areas: 
+        "rightPanelTitle"
+        "rightPanelInstruction"
+        "codingSection";
+}
+.empty{
+    grid-area: empty;
+}
+#rightPanelTitle{
+    grid-area: rightPanelTitle;
+    margin-left: 50px;
+    font-weight: 40;
+    height: 100%;
+}
+.rightPanelInstruction{
+    grid-area: rightPanelInstruction;
+    background-color: #fdb546ff;
+    width: 98%;
+    margin: 0 auto;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    height: 200px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 40px;
+
+}
+.stageNote{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+li{
+    list-style-type: none;
+    background: #f4eddf;
+    font-size: 100%;
+    margin-bottom: 10px;
+}
+
+#previousLevel{
+    background: #f4eddf;
+    color:#a15e21;
+    margin-right: 10px;
+    border-color: #dbb691ff; 
+    padding: 1%;
+    position: absolute;
+    border: none;
+    font-size: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+#nextLevel{
+    background: #f4eddf;
+    color:#a15e21;
+    margin-left: 190px;
+    border-color: #dbb691ff; 
+    padding: 1%;
+    position: absolute;
+    border: none;
+    font-size: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+.codingSection{
+    background-color: #deab5dff;
+    height: 59%;
+    width: 38.6%;
+    font-size: 120%;
+    overflow-y: auto;
+    overflow-x:hidden;
+    position: absolute;
+    top: 40%;
+    border: none;
+    min-height: 200px;
+    padding: 10px;
+}
+.toolBox::-webkit-scrollbar{
+    display: none;
+}
+
+#toolBoxTitle{
+color: white;
+margin-bottom: 0;
+}
+
+.toolBox{
+  background-color: #a15e21ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  top: 10vh;
+  right: 40%;
+  width: 12%;
+  height: 50%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.draggable-list li {
+    background-color: #fdb546ff;
+    display: flex;
+    flex: 1;
+    margin-bottom: 10px;
+    border: 2px solid #f4eddfff;
+    width: 100%;
+  }
+  
+  .draggable {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .check-btn {
+    background-color: #f4eddfff;
+    border: none;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    position: absolute;
+    right: 590px;
+    bottom: 10px;
+    z-index: 4;
+    width: 100px;
+    height: 80px;
+    font-size: 60px;
+    color: #a15e21ff;
+  }
+  
+  .check-btn:active {
+    transform: scale(0.98);
+  }
+  
+  .check-btn:focus {
+    outline: none;
+  }
+
+.wrong {
+    background-color: red;
+  }
+  .right {
+    background-color: green;
+  }
+
+  .draggable-list {
+    padding: 0px;
+    width: 90%;
+    margin-right: 2%;
+  }
+
+  .draggable {
+    padding: 5px;
+    cursor: pointer;
+
+  }
+  .over {
+    background-color: #ddd;
+  }
+#correct{
+    font-size: 100%;
+    z-index: 2;
+    position: absolute;
+    right: 300px;
+    width:100px;
+    height:100px;
+    display: none;
+}
+
+canvas{
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+}
+#win{
+    position: absolute;
+    top: 30%;
+    right: 57%;
+    font-size: 300%;
+    text-align: center;
+    z-index: 5;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+#nextButton{
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    font-size: 300%;
+    z-index: 6;
+    font-family: "Economica", sans-serif;
+    margin-top: 23.8%;
+    margin-left: 33%;
+    color: #bf8449ff;
+    font-weight: 700;
+}
+
+/*lesson1*/
+
+.lesson{
+    overflow-y: hidden;
+    background: #fdb546ff;
+    display: grid;
+    grid-template-rows: 1fr 7fr 1fr;
+    overflow-y: hidden;
+}
+#lessonPage{
+    overflow-y: hidden;
+}
+
+.lessonTop{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.lessonTitle{
+    margin-left: 43.5%;
+}
+.lessonMiddle{
+    display: none;
+    font-size: 50px;
+    align-content: center;
+    justify-content: center;
+    background: #f4eddfff;
+    width: 95%;
+    margin-left: 2.5%;
+    padding: 10px;
+    text-align: center;
+    height: 100%;
+}
+.choices{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height:80%;
+    margin-left: 5%;
+}
+#answer{
+    
+}
+.choicesButton{
+    cursor: pointer;
+    height: 15%;
+    width: 100%;
+    border: none;
+    background-color: #a15e212e;
+    color: #a15e21;
+    font-size:80%;
+    font-family: "Economica", sans-serif;
+}
+.lessonButton{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.lessonPageButton1{
+    background-color: #f4eddfff;    
+    border: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size:15px;
+    font-family: "Economica", sans-serif;
+    color: #a15e21ff;
+    cursor: pointer;
+}
+.lessonPageButton2{
+    background-color: #ed8b1cff;   
+    border: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size:15px;
+    font-family: "Economica", sans-serif;
+    color: #f4eddf;
+    cursor: pointer;
+}
+.lessonPageButton3{
+    background-color: #a15e21ff;   
+    border: none; 
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size:15px;
+    font-family: "Economica", sans-serif;
+    color: #f4eddfff;
+    cursor: pointer;
+}
+
+.toolButton{
+    width: 220px;
+    height: 40px;
+    padding:0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 40px;
+    margin-top: 10px;
+    gap: 10px;
+}
+.lessonpage1{
+    display: block;
+}
+.takeNote{
+    background: #f4eddf;
+    color:#a15e21;
+    margin-right: 10px;
+    border-color: #dbb691ff; 
+    padding: 1%;
+}
+#noteIframe{
+    display: none;
+    position: absolute;
+    right: 15px;
+    top: 11%;
+    height: 25%;
+    resize: vertical;
+    z-index: 5;
+}
+
+.bookmark{
+    background: #f4eddf;
+    color:#a15e21;
+    width: 100%;
+    height: 100%;    
+    margin-right: 10px;
+    border-color: #dbb691ff; 
+}
+
+/*note*/
+.notepage{
+    overflow-y: auto;
+}
+.notes__sidebar{
+    width: 100%;
+}
+.notes__add{
+    background: #009578; 
+    border: none;
+    border-radius: 7px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    padding: 0.5em 0;
+    width: 100%;
+}
+.notes__add:hover{
+    background: #00af8c;
+}
+
+/*
+.notes__preview {
+    display: flex;
+    flex-direction: column;
+    padding: 1em 1em;
+    flex-grow: 1;
+}*/
+
+.notes__preview{
+    overflow-y: auto;
+    width: 98%;
+    height: 100%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-box{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+.content{
+    position: relative;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    min-height: 100px;
+    padding: 5px;
+    font-size: 20px;
+}
+.trash-icon{
+    position: relative;
+    cursor: pointer;
+}
+.noteTitle{
+    height: 100%;
+}
+
+/*bookmark*/
+
+.bookmarkPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.SavedPagesTitle{
+    background-color: white;
+    width: 90%;
+    height: 100px;
+    font-size: 50px;
+    font-family: "Economica", sans-serif;
+    cursor: pointer;
+}
