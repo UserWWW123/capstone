@@ -6,6 +6,7 @@ function setup() {
     ball = new Sprite(100, 100);
     ball.diameter = 30;
     ball.color = color(255, 0, 0);
+    ball.image = 'assets/shipYellow.png';
 
     stick = new Sprite (-50,200, 300, 20);
     stick.collider='statics';

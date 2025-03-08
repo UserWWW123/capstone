@@ -3,6 +3,7 @@
 let block, arrow, crate, doorClosed, doorwayMiddle, stairs, shipYellow;
 
 function preload(){
+    
 }
 
 function setup() {
